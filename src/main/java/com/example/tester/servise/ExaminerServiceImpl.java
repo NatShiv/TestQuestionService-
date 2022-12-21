@@ -39,6 +39,6 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     public static int generateRandomInt(int num) {
         java.util.Random random = new java.util.Random();
-        return random.nextInt(1 + num);
+        return random.nextInt(num);
     }
 }

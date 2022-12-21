@@ -9,11 +9,11 @@ import java.util.*;
 @Service
 public class MathQuestionService implements QuestionService {
 
-    private Map<String, List<String>> constantRandomMath = new HashMap<>();
+    private final Map<String, List<String>> constantRandomMath = new HashMap<>();
 
-    List<String> question = List.of("Что такое ", "Назавите формулу площади  ", "Назавите формулу  объема ");
-    List<String> que1 = List.of("квадрат?", "прямоугольник?", "треугольник?", "прямая?", "отрезок?");
-    List<String> que2 = List.of("куба.", "параллелограмма.", "трапеции?", "шара?", "многоугольника? ");
+    private final List<String> question = List.of("Что такое ", "Назавите формулу площади  ", "Назавите формулу  объема ");
+    private final  List<String> que1 = List.of("квадрат?", "прямоугольник?", "треугольник?", "прямая?", "отрезок?");
+    private final  List<String> que2 = List.of("куба.", "параллелограмма.", "трапеции?", "шара?", "многоугольника? ");
 
     int maxMathQuestionCount = question.size() * (que1.size() + 2 * que2.size());
 
@@ -24,7 +24,7 @@ public class MathQuestionService implements QuestionService {
         constantRandomMath.put("Назавите формулу  объема ", que2);
         Set<String> randomQuestionList = new HashSet<>();
         while (randomQuestionList.size() < num) {
-            String key = question.get(generateRandomInt(question.size()-1));
+            String key = question.get(generateRandomInt(question.size()));
             randomQuestionList.add(key + constantRandomMath.get(key).get(generateRandomInt(5)));
         }
                return randomQuestionList;

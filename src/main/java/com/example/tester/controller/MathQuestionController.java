@@ -1,10 +1,8 @@
 package com.example.tester.controller;
 
-import com.example.tester.exseption.MethodNotAllowed;
 import com.example.tester.model.Question;
 import com.example.tester.servise.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,23 +18,18 @@ public class MathQuestionController {
 
     @GetMapping
     public List<Question> getAll() {
-        return service.getAll();}
+        return service.getAll();
+    }
 
     @GetMapping("/add")
     public Question add(@RequestParam(defaultValue = "") String question,
-                        @RequestParam(defaultValue = "")String answer) {
+                        @RequestParam(defaultValue = "") String answer) {
         return service.add(question, answer);
     }
 
     @GetMapping("/remove")
-    public Question remove(@RequestParam(defaultValue = "")String question,
-                           @RequestParam(defaultValue = "")String answer) {
+    public Question remove(@RequestParam(defaultValue = "") String question,
+                           @RequestParam(defaultValue = "") String answer) {
         return service.remove(question, answer);
     }
-    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    @ExceptionHandler(MethodNotAllowed.class)
-    public String handleException(Exception e) {
-        return e.getMessage();
-    }
-
 }

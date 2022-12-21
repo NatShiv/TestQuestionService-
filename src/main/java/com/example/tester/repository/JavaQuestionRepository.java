@@ -12,14 +12,14 @@ import java.util.*;
 @Repository
 public class JavaQuestionRepository implements QuestionRepository {
 
-    Map<String, Question> questionBook;
+    private final Map<String, Question> questionBook;
 
     public JavaQuestionRepository() {
         this.questionBook = new HashMap<>();
     }
 
     @Override
-    public Question add(String question, String answer) throws QuestionAlreadyAdded {
+    public Question add(String question, String answer) {
         Validator.validate(question);
         Validator.validate(answer);
         if (questionBook.containsKey(question)) {
@@ -49,15 +49,16 @@ public class JavaQuestionRepository implements QuestionRepository {
 
     @Override
     public List<Question> getAll() {
-        if (questionBook.size() == 0) {
+        if (questionBook.isEmpty()) {
             throw new QuestionNoAdded("Список вопросов пуст.");
         }
         return new ArrayList<>(questionBook.values());
     }
 
     public List<String> getQuestion() {
-        if (questionBook.size() == 0) {
-            throw new QuestionNoAdded("Список вопросов пуст.");}
+        if (questionBook.isEmpty()) {
+            throw new QuestionNoAdded("Список вопросов пуст.");
+        }
 
         return new ArrayList<>(questionBook.keySet());
 
@@ -65,6 +66,6 @@ public class JavaQuestionRepository implements QuestionRepository {
 
     @PostConstruct
     public void init() {
-            questionBook.put("QuestionText", new Question("QuestionText", "QuestionAnswer"));
+        questionBook.put("QuestionText", new Question("QuestionText", "QuestionAnswer"));
     }
 }
